@@ -16,6 +16,25 @@
       </div>
     </header>
 
+    <!-- Video Hero Section -->
+    <section class="relative h-screen w-full overflow-hidden">
+      <video
+        class="absolute inset-0 h-full w-full object-cover"
+        autoplay
+        loop
+        muted
+        playsinline
+      >
+        <source src="https://youtu.be/aZsicM8i_OI" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="relative z-10 flex h-full items-center justify-center">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-wide text-white drop-shadow-lg">
+          WYN Scout
+        </h1>
+      </div>
+    </section>
+
     <!-- Hero Section with Carousel -->
     <section id="highlights" class="container mx-auto px-4 py-12">
       <div class="text-center mb-12">
@@ -234,7 +253,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const currentSlide = ref(0)
 
