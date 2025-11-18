@@ -3,10 +3,13 @@
     <NuxtRouteAnnouncer />
     
     <!-- Header -->
-    <header class="container mx-auto px-4 py-6">
-      <div class="flex items-center justify-between">
+    <header
+      class="fixed inset-x-0 top-0 px-4 py-6 z-20 transition-colors duration-300"
+      :class="isScrolled ? 'bg-slate-900/80 backdrop-blur-md border-b border-slate-800/60' : 'bg-transparent'"
+    >
+      <div class="container mx-auto flex items-center justify-between">
         <div class="text-2xl font-bold text-white">
-          <span class="text-green-500">WYN</span> Agency
+          <span class="text-green-500">WYN</span> Scout
         </div>
         <nav class="hidden md:flex gap-6">
           <a href="#highlights" class="text-gray-300 hover:text-white transition-colors">Highlights</a>
@@ -18,15 +21,16 @@
 
     <!-- Video Hero Section -->
     <section class="relative h-screen w-full overflow-hidden">
-      <video
-        class="absolute inset-0 h-full w-full object-cover"
-        autoplay
-        loop
-        muted
-        playsinline
-      >
-        <source src="https://youtu.be/aZsicM8i_OI" type="video/mp4" />
-      </video>
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <iframe
+          class="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 aspect-video"
+          src="https://www.youtube.com/embed/aZsicM8i_OI?autoplay=1&mute=1&loop=1&playlist=aZsicM8i_OI&controls=0&modestbranding=1&rel=0&start=7"
+          title="WYN Scout"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
       <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 flex h-full items-center justify-center">
         <h1 class="text-5xl md:text-7xl font-extrabold tracking-wide text-white drop-shadow-lg">
@@ -245,7 +249,7 @@
     <!-- Footer -->
     <footer id="contact" class="container mx-auto px-4 py-12 border-t border-slate-700">
       <div class="text-center text-gray-400">
-        <p class="mb-2">© 2025 WYN Agency. All rights reserved.</p>
+        <p class="mb-2">© 2025 WYN Scout. All rights reserved.</p>
         <p>Professional Soccer Player Management</p>
       </div>
     </footer>
@@ -256,6 +260,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 const currentSlide = ref(0)
+const isScrolled = ref(false)
 
 const carouselSlides = [
   {
@@ -286,16 +291,24 @@ const previousSlide = () => {
 
 let autoSlideInterval: ReturnType<typeof setInterval> | null = null
 
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 10
+}
+
 onMounted(() => {
   // Auto-advance carousel every 5 seconds
   autoSlideInterval = setInterval(() => {
     nextSlide()
   }, 5000)
+
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
 })
 
 onUnmounted(() => {
   if (autoSlideInterval) {
     clearInterval(autoSlideInterval)
   }
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
