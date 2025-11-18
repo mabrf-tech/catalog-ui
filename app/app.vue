@@ -33,9 +33,14 @@
       </div>
       <div class="absolute inset-0 bg-black/60"></div>
       <div class="relative z-10 flex h-full items-center justify-center">
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-wide text-white drop-shadow-lg">
-          WYN Scout
-        </h1>
+        <div class="text-center space-y-4">
+          <h1 class="text-5xl md:text-9xl font-extrabold tracking-wide text-white/50 drop-shadow-lg">
+            <span class="text-green-500/50">WYN</span> Scout
+          </h1>
+          <p class="text-xl md:text-3xl text-white/50 font-extrabold tracking-wide">
+            Your best move
+          </p>
+        </div>
       </div>
     </section>
 
